@@ -8,18 +8,21 @@ import '../../../widets/app_error.dart';
 import '../../../widets/app_loader.dart';
 
 class TabsList extends StatefulWidget {
-  const TabsList({super.key});
+  final String categoryId;
+  const TabsList({super.key,  required this.categoryId,} );
 
   @override
   State<TabsList> createState() => _TabsListState();
 }
+
+
 
 class _TabsListState extends State<TabsList> {
   int currentTabIndex=0;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: ApiManager.loadList(),
+        future: ApiManager.loadList(widget.categoryId),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return AppError( error: snapshot.error.toString(),);
@@ -70,7 +73,7 @@ class _TabsListState extends State<TabsList> {
       padding: EdgeInsets.all(12),
       margin: EdgeInsets.symmetric(vertical:8 ),
       decoration: BoxDecoration(
-          border: Border.all(color: Color(0xff39a352),width: 1),
+          border: Border.all(color: Color(0xff39a352),width: 2),
           borderRadius: BorderRadius.circular(18),
           color: isSlected ? Color(0xff39a352):Colors.transparent
       ),

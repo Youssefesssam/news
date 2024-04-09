@@ -33,12 +33,6 @@ class ArticalesResponse {
     return data;
   }
 }
-
-
-
-
-
-
 class Source {
   String? id;
   String? name;

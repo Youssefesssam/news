@@ -41,7 +41,7 @@ return ListView.builder(
     CachedNetworkImage(
         imageUrl: article.urlToImage!,
      height: MediaQuery.of(context).size.height*.25,
-     errorWidget:(_,__,___)=> const Center(child:Icon(Icons.error,color: Colors.red,size: 60,))  ,
+     errorWidget:(_,__,___)=> const Center(child:Icon(Icons.error,color: Colors.red,size: 50,))  ,
      placeholder:(_,__,)=> const AppLaoder(),
 
     ),
