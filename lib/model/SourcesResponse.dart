@@ -15,11 +15,11 @@ class SourcesResponse {
 
 });
 
-	SourcesResponse.fromJsonMap( dynamic jason):
-		status = jason["status"],
-	  message = jason["message"],
-		code =jason["code"],
-	  sources = List<Source>.from(jason["sources"].map((it) =>
+	SourcesResponse.fromJsonMap( dynamic json):
+		status = json["status"],
+	  message = json["message"],
+		code =json["code"],
+	  sources = List<Source>.from(json["sources"].map((it) =>
 				Source.fromJsonMap(it)));
 
 	Map<String, dynamic> toJson() {

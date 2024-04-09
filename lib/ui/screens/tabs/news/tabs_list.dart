@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:news/data/api_manegar.dart';
 import 'package:news/model/sources.dart';
+import 'package:news/ui/screens/tabs/news/tabs_details.dart';
 
 import '../../../widets/app_error.dart';
 import '../../../widets/app_loader.dart';
@@ -25,7 +26,7 @@ class _TabsListState extends State<TabsList> {
           } else if (snapshot.hasData) {
             return tabsList(snapshot.data!.sources!);
           } else {
-            return AddLaoder();
+            return Center(child: AppLaoder());
           }
         });
   }
@@ -44,21 +45,20 @@ class _TabsListState extends State<TabsList> {
             indicatorColor: Colors.transparent,
             onTap: (newTabIndex){
               setState(() {
-                currentTabIndex =newTabIndex;
+                currentTabIndex = newTabIndex;
               });
 
             },
-          )
-          ,
-          SizedBox(
-            height: 200.0,
-            child: TabBarView(
-              children: sources.map((source){
-                return  Text(source.url ??'');
+          ),
 
-              }).toList(),
+          Expanded(
+              child: TabBarView(
+                children: sources.map((source){
+                  return  TabDetails(sourceId: source.id,);
+                }).toList(),
+              ),
             ),
-          )
+
         ],
       ),
     );

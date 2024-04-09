@@ -33,10 +33,8 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
 
-        body: Column(
-          children: [
-            const TabsList(),
-          ],
-        ));
+        body: const TabsList(),
+
+        );
   }
 }
