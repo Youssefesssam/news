@@ -13,8 +13,12 @@ class CategoriesTab extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(30),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("pick your category of interest"),
+          Text("pick your category",style: TextStyle(color: Color(0xff4f5a68),fontSize: 30,fontWeight: FontWeight.bold) ,),
+          SizedBox(height: 5,),
+          Text(" of interest",style: TextStyle(color: Color(0xff4f5a68),fontSize: 30,fontWeight: FontWeight.bold),),
+          SizedBox(height: 30,),
           Expanded(
             child: GridView.builder(
               itemCount: Category.categories.length,

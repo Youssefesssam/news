@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:news/data/api_manegar.dart';
 import 'package:news/model/sources.dart';
 import 'package:news/ui/screens/tabs/news/tabs_details.dart';
-
 import '../../../widets/app_error.dart';
 import '../../../widets/app_loader.dart';
 
@@ -15,14 +14,12 @@ class TabsList extends StatefulWidget {
   State<TabsList> createState() => _TabsListState();
 }
 
-
-
 class _TabsListState extends State<TabsList> {
-  int currentTabIndex=0;
+  TabsListViewModel viewModel;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: ApiManager.loadList(widget.categoryId),
+        future:viewModel.getTabs,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return AppError( error: snapshot.error.toString(),);
@@ -43,12 +40,12 @@ class _TabsListState extends State<TabsList> {
       child: Column(
         children: [
           TabBar(
-            tabs: sources.map((source)=>tabWidget(source, currentTabIndex == sources.indexOf(source) )).toList(),
+            tabs: sources.map((source)=>tabWidget(source,viewModel.currentTabIndex == sources.indexOf(source) )).toList(),
             isScrollable: true,
             indicatorColor: Colors.transparent,
             onTap: (newTabIndex){
               setState(() {
-                currentTabIndex = newTabIndex;
+                viewModel.currentTabIndex = newTabIndex;
               });
 
             },
@@ -85,7 +82,10 @@ class _TabsListState extends State<TabsList> {
   }
 
 }
-
+class TabsListViewModel{
+ int currentTabIndex =0;
+ get getTabs=> ApiManager.loadList(widget.categoryId);
+}
 
 
 
