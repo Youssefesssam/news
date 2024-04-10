@@ -15,11 +15,11 @@ class TabsList extends StatefulWidget {
 }
 
 class _TabsListState extends State<TabsList> {
-  TabsListViewModel viewModel;
+  int currentTabIndex=0;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future:viewModel.getTabs,
+        future:ApiManager.loadList(widget.categoryId),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return AppError( error: snapshot.error.toString(),);
@@ -40,12 +40,12 @@ class _TabsListState extends State<TabsList> {
       child: Column(
         children: [
           TabBar(
-            tabs: sources.map((source)=>tabWidget(source,viewModel.currentTabIndex == sources.indexOf(source) )).toList(),
+            tabs: sources.map((source)=>tabWidget(source,currentTabIndex == sources.indexOf(source) )).toList(),
             isScrollable: true,
             indicatorColor: Colors.transparent,
             onTap: (newTabIndex){
               setState(() {
-                viewModel.currentTabIndex = newTabIndex;
+                currentTabIndex = newTabIndex;
               });
 
             },
@@ -81,10 +81,6 @@ class _TabsListState extends State<TabsList> {
 
   }
 
-}
-class TabsListViewModel{
- int currentTabIndex =0;
- get getTabs=> ApiManager.loadList(widget.categoryId);
 }
 
 

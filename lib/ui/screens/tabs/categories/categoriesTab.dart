@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:news/ui/widets/app_loclization.dart';
+import 'package:provider/provider.dart';
+import '../../../../data/providerLanguage/providerLanguage.dart';
 import '../../../../model/category.dart';
 import 'category_widget.dart';
 
@@ -10,15 +12,16 @@ class CategoriesTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProviderLanguage providerLanguage =Provider.of(context);
     return Container(
       margin: const EdgeInsets.all(30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("pick your category",style: TextStyle(color: Color(0xff4f5a68),fontSize: 30,fontWeight: FontWeight.bold) ,),
-          SizedBox(height: 5,),
-          Text(" of interest",style: TextStyle(color: Color(0xff4f5a68),fontSize: 30,fontWeight: FontWeight.bold),),
-          SizedBox(height: 30,),
+           Text(context.l10n(context).pickYourCategory,style: TextStyle(color: Color(0xff4f5a68),fontSize: 30,fontWeight: FontWeight.bold) ,),
+          const SizedBox(height: 5,),
+           Text(context.l10n(context).ofInterest,style: TextStyle(color: Color(0xff4f5a68),fontSize: 30,fontWeight: FontWeight.bold),),
+          const SizedBox(height: 30,),
           Expanded(
             child: GridView.builder(
               itemCount: Category.categories.length,

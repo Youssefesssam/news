@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:news/ui/widets/app_loclization.dart';
 
 class Category{
   String backEndId;
@@ -15,6 +16,7 @@ class Category{
     required this.isLeftSided,
     required this.backGroundColor
   });
+
   static List<Category> categories = [
     Category(backEndId: "sports", title: "Sports", imagePath:"assets/ball.png", isLeftSided: true, backGroundColor: Colors.red[900]!),
     Category(backEndId: "technology", title: "Technology", imagePath: "assets/Politics.png", isLeftSided: false, backGroundColor: Colors.blue[900]!),

@@ -3,6 +3,7 @@ import 'package:news/model/category.dart';
 import 'package:news/ui/screens/settings/settingsTab.dart';
 import 'package:news/ui/screens/tabs/categories/categoriesTab.dart';
 import 'package:news/ui/screens/tabs/news/tabs_list.dart';
+import 'package:news/ui/widets/app_loclization.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -49,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
              const SizedBox(width: 120,),
               Center(
                 child: Text(
-                  "Category News",
+                  context.l10n(context).newsApp,
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 25,
@@ -57,7 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const Spacer(),
-              Image.asset("assets/search.png")
+              InkWell(
+                onTap: (){},
+                  child: Image.asset("assets/search.png"))
             ],
           ),
           drawer: buildDrawer(),
@@ -74,9 +77,8 @@ class _HomeScreenState extends State<HomeScreen> {
             height: MediaQuery.sizeOf(context).height * .15,
             width: MediaQuery.sizeOf(context).width,
             color: const Color(0xff39a352),
-            child: const Center(
-                child: Text(
-              "News App!",
+            child:  Center(
+                child: Text(context.l10n(context).newsApp,
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -88,13 +90,13 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildDrawerListItem(Icons.list,"Category",(){
+                buildDrawerListItem(Icons.list,context.l10n(context).category,(){
                   setState(() {
                     body = CategoriesTab(onCategoryClick: onCategoryClick);
                     Navigator.pop(context);
                   });
                 }),
-                buildDrawerListItem(Icons.settings,"Setting",(){
+                buildDrawerListItem(Icons.settings,context.l10n(context).setting,(){
                   setState(() {
                     body = const SettingsTab();
                     Navigator.pop(context);
