@@ -4,6 +4,7 @@ import 'package:news/ui/screens/home.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:news/ui/screens/settings/settingsTab.dart';
+import 'package:news/ui/screens/splashScreen/splashScreen.dart';
 import 'package:provider/provider.dart';
 void main() {
   runApp( ChangeNotifierProvider(
@@ -33,9 +34,10 @@ class MyApp extends StatelessWidget {
       ],
       locale: Locale(providerLanguage.current),
       routes:({
+        SplashScreen.routeName:(_)=>SplashScreen(),
         HomeScreen.routeName:(_)=>const HomeScreen()
       }),//
-      initialRoute: HomeScreen.routeName,// This trailing comma makes auto-formatting nicer for build methods.
+      initialRoute: SplashScreen.routeName,// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
