@@ -3,6 +3,7 @@ import 'package:news/model/category.dart';
 import 'package:news/ui/screens/settings/settingsTab.dart';
 import 'package:news/ui/screens/tabs/categories/categoriesTab.dart';
 import 'package:news/ui/screens/tabs/news/tabs_list.dart';
+import 'package:news/ui/screens/tabs/searshBar/searshBar.dart';
 import 'package:news/ui/widets/app_loclization.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,51 +21,56 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    body =CategoriesTab(onCategoryClick: onCategoryClick);
+    body = CategoriesTab(onCategoryClick: onCategoryClick);
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()async{
-       if(body is CategoriesTab ){
-         return true;
-       }else{
-         setState((){
-           body == CategoriesTab(onCategoryClick: onCategoryClick);
-         });
+      onWillPop: () async {
+        if (body is CategoriesTab) {
+          return true;
+        } else {
+          setState(() {
+            body == CategoriesTab(onCategoryClick: onCategoryClick);
+          });
 
-         return false;
-       }
+          return false;
+        }
       },
       child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: const Color(0xff39a452),
-            centerTitle: true,
-            elevation: 0,
-            shape: const ContinuousRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(100),
-                    bottomRight: Radius.circular(100))),
-            actions: [
-             const SizedBox(width: 120,),
-              Center(
-                child: Text(
-                  context.l10n(context).newsApp,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.normal),
-                ),
+        appBar: AppBar(
+          backgroundColor: const Color(0xff39a452),
+          centerTitle: true,
+          elevation: 0,
+          shape: const ContinuousRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(100),
+                  bottomRight: Radius.circular(100))),
+          actions: [
+            const SizedBox(
+              width: 120,
+            ),
+            Center(
+              child: Text(
+                context.l10n(context).newsApp,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.normal),
               ),
-              const Spacer(),
-              InkWell(
-                onTap: (){},
-                  child: Image.asset("assets/search.png"))
-            ],
-          ),
-          drawer: buildDrawer(),
-          body: body ,
+            ),
+            const Spacer(),
+            InkWell(
+                onTap: () {
+                  showSearch(
+                      context: context, delegate: CustomSearchDelegate());
+                },
+                child: Image.asset("assets/search.png"))
+          ],
+        ),
+        drawer: buildDrawer(),
+        body: body,
       ),
     );
   }
@@ -77,8 +83,9 @@ class _HomeScreenState extends State<HomeScreen> {
             height: MediaQuery.sizeOf(context).height * .15,
             width: MediaQuery.sizeOf(context).width,
             color: const Color(0xff39a352),
-            child:  Center(
-                child: Text(context.l10n(context).newsApp,
+            child: Center(
+                child: Text(
+              context.l10n(context).newsApp,
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -90,51 +97,58 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildDrawerListItem(Icons.list,context.l10n(context).category,(){
+                buildDrawerListItem(Icons.list, context.l10n(context).category,
+                    () {
                   setState(() {
                     body = CategoriesTab(onCategoryClick: onCategoryClick);
                     Navigator.pop(context);
                   });
                 }),
-                buildDrawerListItem(Icons.settings,context.l10n(context).setting,(){
+                buildDrawerListItem(
+                    Icons.settings, context.l10n(context).setting, () {
                   setState(() {
                     body = const SettingsTab();
                     Navigator.pop(context);
-
                   });
                 }),
               ],
             ),
           )
-
-
         ],
       ),
     );
   }
-  Widget buildDrawerListItem(IconData icon,String data,Function onClick){
+
+  Widget buildDrawerListItem(IconData icon, String data, Function onClick) {
     return InkWell(
-      onTap: (){
-         onClick();
+      onTap: () {
+        onClick();
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical:8 ),
+        margin: const EdgeInsets.symmetric(vertical: 8),
         child: Row(
           children: [
-            Icon(icon,size: 40,),
-            const SizedBox(width: 8,),
-            Text(data,style: const TextStyle(fontSize: 25),),
-
+            Icon(
+              icon,
+              size: 40,
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            Text(
+              data,
+              style: const TextStyle(fontSize: 25),
+            ),
           ],
         ),
       ),
     );
   }
 
-  void onCategoryClick(Category category ) {
+  void onCategoryClick(Category category) {
     setState(() {
-     body = TabsList(categoryId: category.backEndId);
+      body = TabsList(categoryId: category.backEndId);
     });
   }
-
 }
+

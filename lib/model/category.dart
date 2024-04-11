@@ -1,9 +1,8 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:news/ui/widets/app_loclization.dart';
 
-class Category{
+
+ class Category{
   String backEndId;
   String title;
   String imagePath;
@@ -25,4 +24,9 @@ class Category{
     Category(backEndId: "entertainment", title: "Entertainment", imagePath: "assets/environment.png", isLeftSided: true, backGroundColor: Colors.lightBlue),
     Category(backEndId: "science", title: "Science", imagePath: "assets/science.png", isLeftSided: false, backGroundColor: Color(0xfff0d252)),
 
-  ];}
+  ];
+
+
+
+
+}
